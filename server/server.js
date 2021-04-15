@@ -4,13 +4,10 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const userRouter = require('./routes/users')
 const todoRouter = require('./routes/todos')
-const admin = require('firebase-admin');
 const bodyParser = require('body-parser')
 require('dotenv').config()
 let db_uri=process.env.MONGODB_URI
 mongoose.connect(db_uri, { useNewUrlParser: true,useUnifiedTopology: true }) 
-let jsonGoogleKey=require('./src/googlekey')
-admin.initializeApp({credential: admin.credential.cert(jsonGoogleKey)});
 
 
 
