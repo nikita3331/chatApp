@@ -7,6 +7,9 @@ const todoRouter = require('./routes/todos')
 const bodyParser = require('body-parser')
 const { Server } = require('ws');
 const crypto = require("crypto");
+const webSocketServer = require('websocket').server;
+const http = require('http');
+
 
 require('dotenv').config()
 // let db_uri=process.env.MONGODB_URI
@@ -33,9 +36,10 @@ app.use('/users', userRouter)
 app.use('/todos', todoRouter)
 app.listen(process.env.PORT||3000, () => console.log('Server Started'))
 
-const wss = new Server({ server:app });
-
-wss.on('request', function(request) {
+const wsServer = new webSocketServer({
+  httpServer: app
+});
+wsServer.on('request', function(request) {
   var userID = crypto.randomBytes(40).toString('hex')
   console.log((new Date()) + ' Recieved a new connection from origin ' + request.origin + '.');
   // You can rewrite this part of the code to accept only the requests from allowed origin
