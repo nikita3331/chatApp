@@ -7,7 +7,7 @@ import thunkMiddleware from 'redux-thunk'
 import { Provider, useSelector } from 'react-redux'
 import Navigator from './navigator'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-const client = new W3CWebSocket('ws://127.0.0.1:8010');
+const client = new W3CWebSocket('wss://chat-as-a-service.herokuapp.com/');
 
 const middleware = applyMiddleware(thunkMiddleware)
 const store = createStore(reducer, middleware) 

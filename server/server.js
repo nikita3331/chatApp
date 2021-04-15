@@ -32,9 +32,7 @@ app.use(bodyParser.urlencoded({
 app.use('/users', userRouter)
 app.use('/todos', todoRouter)
 app.listen(process.env.PORT||3000, () => console.log('Server Started'))
-app.get('/*', function(req, res) {
-  res.sendFile(__dirname+'/public/hello.html');
-});
+
 const wss = new Server({ server:app });
 
 wss.on('request', function(request) {
@@ -57,4 +55,7 @@ wss.on('request', function(request) {
     delete clients[userID];
     connection.sendUTF(JSON.stringify({halko:1}))
   });
+});
+app.get('/*', function(req, res) {
+  res.sendFile(__dirname+'/public/hello.html');
 });
