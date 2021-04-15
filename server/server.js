@@ -1,5 +1,5 @@
 const express = require('express')
-const app = express()
+const server = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
 const userRouter = require('./routes/users')
@@ -16,30 +16,30 @@ require('dotenv').config()
 // mongoose.connection.once('open', () => console.log('Connected to Database'))
 
 // app.use(express.json())
-app.use(cors())
-app.disable('etag');
-app.use(bodyParser.json({
-    limit: '50mb',
-    extended: true
-  }));
+// app.use(cors())
+// app.disable('etag');
+// app.use(bodyParser.json({
+//     limit: '50mb',
+//     extended: true
+//   }));
   
-app.use(bodyParser.urlencoded({
-  limit: '50mb',
-  parameterLimit: 500000,
-  extended: true 
-}));
+// app.use(bodyParser.urlencoded({
+//   limit: '50mb',
+//   parameterLimit: 500000,
+//   extended: true 
+// }));
 
 
-app.use('/users', userRouter)
-app.use('/todos', todoRouter)
-app.listen(process.env.PORT||3000, () => console.log('Server Started'))
+server.use('/users', userRouter)
+server.use('/todos', todoRouter)
+server.listen(process.env.PORT||3000, () => console.log('Server Started'))
 // app.get('/*', function(req, res) {
 //   res.sendFile(__dirname+'/public/hello.html');
 // });
 
 
 
-const wss = new Server({ server:app });
+const wss = new Server({ server });
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
