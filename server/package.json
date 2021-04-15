@@ -34,6 +34,7 @@
     "request": "^2.88.2",
     "swagger-ui-express": "^4.1.4",
     "util": "^0.12.3",
-    "websocket": "^1.0.34"
+    "websocket": "^1.0.34",
+    "ws": "^7.4.4"
   }
 }
