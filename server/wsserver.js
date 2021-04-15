@@ -29,4 +29,4 @@ wsServer.on('request', function(request) {
       delete clients[userID];
       connection.sendUTF(JSON.stringify({halko:1}))
     });
-  });
+});
