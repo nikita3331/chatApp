@@ -25,11 +25,11 @@ export async function fetchUserList(authKey) {
     let url = `${MAIN_URL}/users/getAll`
     try {
         let response = await fetch(url, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-                "authKey":authKey
+                "authKey":authKey 
             }
         });
         let json = await response.json();

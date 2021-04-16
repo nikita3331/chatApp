@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import {  StyleSheet ,Text,ScrollView,TouchableOpacity,View} from 'react-native'
+import {  StyleSheet ,Text,ScrollView,TouchableOpacity,View,Image} from 'react-native'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Icon } from 'react-native-elements';
@@ -41,9 +41,9 @@ const MainScreen= (props)=>{
         const [isLoading,SetLoading]=useState(false)
 
         const [userList,SetUserList]=useState([])
-        const fetchUsers=()=>{
+        const fetchUsers=async ()=>{
             SetLoading(true)
-            let resp=['a','b']
+            let resp=await fetchUserList(props.user.authKey)
             SetUserList(resp)
             SetLoading(false)
         }
@@ -57,15 +57,20 @@ const MainScreen= (props)=>{
                 onBackButtonPress={()=>{SetModalVis(false)}}
                 useNativeDriver={true}
             >
-                <View style={{backgroundColor:'white',alignSelf:'center',paddingHorizontal:20,paddingVertical:10,borderRadius:20}}>
+                <View style={styles.modalStyle}>
                     <Text style={styles.pickPersonStyle}>Pick person from list</Text>
                     {isLoading?
                     <Text>Loading...</Text>:
-                    userList.map((item,index)=>(
-                        <View key={index}>
-                            <Text>{item}</Text>
-                        </View>
-                    ))}
+                    userList.map((item,index)=>{
+                        let {login,avatarUri}=item;
+                        
+                        return(
+                            <View key={index} style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                                <Image source={{uri:avatarUri}} style={styles.avatarStyle}/>
+                                <Text style={styles.userNameStyle}>{login}</Text>
+                            </View>
+                        )
+                    })}
                 </View>
             </Modal>
         )
@@ -95,6 +100,23 @@ const styles = StyleSheet.create({
     pickPersonStyle:{
         fontSize:25,
         color:'black',
+        fontWeight:'bold'
+    },
+    modalStyle:{
+        backgroundColor:'white',
+        alignSelf:'center',
+        paddingHorizontal:20,
+        paddingVertical:10,
+        borderRadius:20
+    },
+    avatarStyle:{
+        width:50,
+        height:50,
+        borderRadius:50
+    },
+    userNameStyle:{
+        fontSize:20,
+        marginLeft:20,
         fontWeight:'bold'
     }
 })

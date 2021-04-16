@@ -18,6 +18,7 @@ router.post('/register', async (req, res) => {
         let newUser=new User({
           login: req.body.login,
           password: req.body.password,
+          avatarUri: 'https://cdn.pixabay.com/photo/2020/05/25/20/20/lions-5220431_1280.jpg',
           authKey:auth
         })
         await newUser.save()
@@ -49,7 +50,7 @@ router.get('/getAll', async (req, res) => {
 
       let user=await User.findOne({'authKey':authKey})
       if(user){
-        let usersList=await User.find({'authKey':{ '$nin': [ authKey ] }})
+        let usersList=await User.find({'authKey':{ '$nin': [ authKey ] }},{login:1,avatarUri:1})
         res.status(200).json({success:true,users:usersList})
       }
       else{

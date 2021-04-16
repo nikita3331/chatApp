@@ -12,6 +12,10 @@ const userSchema = new mongoose.Schema({
   authKey:{
     type:String,
     required:true
+  },
+  avatarUri:{
+    type:String,
+    required:true
   }
 })
 
