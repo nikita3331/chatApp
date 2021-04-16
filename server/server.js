@@ -32,12 +32,19 @@ require('dotenv').config()
 
 // server.use('/users', userRouter)
 // server.use('/todos', todoRouter)
-server.listen(process.env.PORT||3000, () => console.log('Server Started'))
+// server.listen(process.env.PORT||3000, () => console.log('Server Started'))
 // app.get('/*', function(req, res) {
 //   res.sendFile(__dirname+'/public/hello.html');
 // });
 
 
+
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html';
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const wss = new Server({ server });
 
