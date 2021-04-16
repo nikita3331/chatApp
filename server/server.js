@@ -30,8 +30,8 @@ require('dotenv').config()
 // }));
 
 
-server.use('/users', userRouter)
-server.use('/todos', todoRouter)
+// server.use('/users', userRouter)
+// server.use('/todos', todoRouter)
 server.listen(process.env.PORT||3000, () => console.log('Server Started'))
 // app.get('/*', function(req, res) {
 //   res.sendFile(__dirname+'/public/hello.html');
