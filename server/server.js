@@ -40,7 +40,7 @@ mongoose.connection.once('open', () => console.log('Connected to Database'))
 
 
 const PORT = process.env.PORT || 3000;
-const INDEX = '/index.html';
+const INDEX = '/public/hello.html';
 
 const server = express()
 server.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
