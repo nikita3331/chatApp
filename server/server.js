@@ -10,10 +10,10 @@ const { Server } = require('ws');
 
 
 require('dotenv').config()
-// let db_uri=process.env.MONGODB_URI
-// mongoose.connect(db_uri, { useNewUrlParser: true,useUnifiedTopology: true }) 
-// mongoose.connection.on('error', (error) => console.error(error))
-// mongoose.connection.once('open', () => console.log('Connected to Database'))
+let db_uri=process.env.MONGODB_URI
+mongoose.connect(db_uri, { useNewUrlParser: true,useUnifiedTopology: true }) 
+mongoose.connection.on('error', (error) => console.error(error))
+mongoose.connection.once('open', () => console.log('Connected to Database'))
 
 // app.use(express.json())
 // app.use(cors())
@@ -43,8 +43,8 @@ const PORT = process.env.PORT || 3000;
 const INDEX = '/index.html';
 
 const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+server.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+server.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const wss = new Server({ server });
 
@@ -57,4 +57,4 @@ setInterval(() => {
   wss.clients.forEach((client) => {
     client.send(new Date().toTimeString());
   });
-}, 1000);
+}, 5000);
