@@ -5,6 +5,8 @@ const mongoose = require('mongoose')
 const userRouter = require('./routes/users')
 const todoRouter = require('./routes/todos')
 const messageRouter = require('./routes/messages')
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('./swagger/documentation');  
 const bodyParser = require('body-parser')
 const crypto = require("crypto");
 const { Server } = require('ws');
@@ -30,6 +32,7 @@ const server = express()
   .use('/users', userRouter)
   .use('/todos', todoRouter)
   .use('/messages', messageRouter)
+  .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs.doc))
   .get('/*',(req,res)=>{res.sendFile('/public/hello.html', { root: __dirname })})
   .listen(process.env.PORT || 3000, () => console.log(`Listening `));
 

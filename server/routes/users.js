@@ -24,10 +24,10 @@ router.post('/register', async (req, res) => {
         res.status(200).json({success:true})
       }
       else{
-        res.status(200).json({success:false,reason:0})
+        res.status(201).json({success:false,reason:0})
       }
   } catch (err) {
-    res.status(500).json({success:false,message:err.message})
+    res.status(500).json({success:false,message:err.message,reason:1})
   }
 })
 router.post('/login', async (req, res) => { 
