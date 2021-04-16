@@ -43,6 +43,23 @@ router.post('/login', async (req, res) => {
     res.status(500).json({success:false,message:err.message})
   }
 })
+router.get('/getAll', async (req, res) => { 
+  try {
+    let authKey=req.header('authKey')
+
+      let user=await User.findOne({'authKey':authKey})
+      if(user){
+        let usersList=await User.find({'authKey':{ '$nin': [ authKey ] }})
+        res.status(200).json({success:true,users:usersList})
+      }
+      else{
+        res.status(200).json({success:false,reason:0})
+      }
+  } catch (err) {
+    res.status(500).json({success:false,message:err.message})
+  }
+})
+
 
 
 

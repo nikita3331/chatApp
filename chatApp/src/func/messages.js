@@ -1,4 +1,4 @@
-import {MAIN_URL} from '../config'
+import {MAIN_URL} from '../config/config'
 export async function getAllMessages(authKey) {
     let url = `${MAIN_URL}/messages/getAll`
     try {
