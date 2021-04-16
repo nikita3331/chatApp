@@ -45,7 +45,7 @@ const INDEX = '/public/hello.html';
 const server = express()
   .use('/users', userRouter)
   .use('/todos', todoRouter)
-  .get('/*',(req,red)=>{res.sendFile(INDEX, { root: __dirname })})
+  .get('/*',(req,res)=>{res.sendFile(INDEX, { root: __dirname })})
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const wss = new Server({ server });
