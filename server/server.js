@@ -4,6 +4,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const userRouter = require('./routes/users')
 const todoRouter = require('./routes/todos')
+const messageRouter = require('./routes/messages')
 const bodyParser = require('body-parser')
 const crypto = require("crypto");
 const { Server } = require('ws');
@@ -28,21 +29,11 @@ const server = express()
   }))
   .use('/users', userRouter)
   .use('/todos', todoRouter)
+  .use('/messages', messageRouter)
   .get('/*',(req,res)=>{res.sendFile('/public/hello.html', { root: __dirname })})
   .listen(process.env.PORT || 3000, () => console.log(`Listening `));
 
 const wss = new Server({ server });
-
-// wss.on('connection', (ws) => {
-//   console.log('Client connected');
-//   ws.on('close', () => console.log('Client disconnected'));
-// });
-
-// setInterval(() => {
-//   wss.clients.forEach((client) => {
-//     client.send(new Date().toTimeString());
-//   });
-// }, 5000);
 const clients = {};
 
 wss.on('request', function(request) {

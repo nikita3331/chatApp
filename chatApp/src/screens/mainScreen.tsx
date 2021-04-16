@@ -4,10 +4,25 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 
+interface IntroMessage {
+    lastMessage: String;
+    date: Date;
+    avatarURI: String;
+}
+interface MessageListProps {
+    messages: Array<IntroMessage>;
+}
 const MainScreen= (props)=>{
-
+    const MessageList:MessageListProps=({messages})=>{
+        return(
+            <Text>Message list</Text>
+        )
+    }
     return(
-        <Text testID="mainHelloText">Main screen</Text>
+        <ScrollView>
+            <Text testID="mainHelloText">Main screen</Text>
+            <MessageList messages={props.messages.messageArray}/>
+        </ScrollView>
     )
 
 }
@@ -37,7 +52,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        messages: state.messages
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(MainScreen);

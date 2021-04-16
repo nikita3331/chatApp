@@ -1,26 +1,20 @@
 import {MAIN_URL} from '../config'
-export async function login(login,password) {
-    let url = `${MAIN_URL}/users/login`
+export async function getAllMessages(authKey) {
+    let url = `${MAIN_URL}/messages/getAll`
     try {
         let response = await fetch(url, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-            },
-            body:JSON.stringify({
-                login:login, 
-                password:password 
-            })
+                "authKey":authKey
+            }
         });
         let json = await response.json();
-
-        console.log(json)
-        return json
-
+        return json.success?json.messages:[]
     }
     catch (error) {
         console.error(error);
-        return {success:false}
+        return []
     }
 }
