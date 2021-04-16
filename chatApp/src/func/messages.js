@@ -11,6 +11,7 @@ export async function getAllMessages(authKey) {
             }
         });
         let json = await response.json();
+        console.log(json)
         return json.success?json.messages:[]
     }
     catch (error) {

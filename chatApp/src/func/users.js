@@ -14,10 +14,7 @@ export async function login(login,password) {
             })
         });
         let json = await response.json();
-
-        console.log(json)
         return json
-
     }
     catch (error) {
         console.error(error);

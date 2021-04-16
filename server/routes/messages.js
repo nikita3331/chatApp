@@ -14,7 +14,7 @@ router.get('/getAll', async (req, res) => {
 
 
   try {
-      let authKey=req.headers["authKey"]
+      let authKey=req.header('authKey')
       let user=await User.findOne({'authKey':authKey})
       if(user ){
         let allMessages=await Message.find({$or:[{sender:authKey},{receiver:authKey}]}) 

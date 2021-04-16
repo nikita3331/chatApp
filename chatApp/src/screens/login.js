@@ -6,8 +6,8 @@ import { handleLogin } from '../actions/user'
 
 
 const LoginScreen= (props)=>{
-    const [loginVal,SetLogin]=useState('')
-    const [passwordVal,SetPass]=useState('')
+    const [loginVal,SetLogin]=useState('Nikita')
+    const [passwordVal,SetPass]=useState('babcia2')
 
     const handleLogin=()=>{
         props.handleLogin(loginVal,passwordVal)
