@@ -48,8 +48,8 @@ const MainScreen= (props)=>{
             modalVis&&fetchUsers()
         },[modalVis])
         const onItemPress=(item)=>{
+            SetModalVis(false)
             navigation.navigate('ChatScreen',{item:item})
-            console.log(item)
         }
         return(
             <Modal
