@@ -4,7 +4,7 @@ import React,{useState} from 'react'
 import {  StyleSheet ,Text,Linking,TextInput,TouchableOpacity,View} from 'react-native'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {LoginScreen,MainScreen} from './screens'
+import {LoginScreen,MainScreen,ChatScreen} from './screens'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 const LoginNav=createBottomTabNavigator();
@@ -20,7 +20,8 @@ const LoginNavigator=()=>{
 const MainNavigator=()=>{
     return(
         <MainNav.Navigator tabBar={()=>(null)}>
-            <MainNav.Screen name="MainScreen" component={MainScreen}  />   
+            <MainNav.Screen name="MainScreen" component={MainScreen}  />
+            <MainNav.Screen name="ChatScreen" component={ChatScreen}  />   
         </MainNav.Navigator>
     )
 }

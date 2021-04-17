@@ -1,3 +1,4 @@
 import LoginScreen from './login'
 import MainScreen from './mainScreen'
-export {LoginScreen,MainScreen}
+import ChatScreen from './chatScreen'
+export {LoginScreen,MainScreen,ChatScreen}

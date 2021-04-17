@@ -5,19 +5,16 @@ import { connect } from 'react-redux'
 import { Icon } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import {fetchUserList} from '../func/users'
+import {IntroMessage} from '../types'
 
-interface IntroMessage {
-    lastMessage: String;
-    date: Date;
-    avatarURI: String;
-}
-interface MessageListProps {
+type MessageListProps ={
     messages: Array<IntroMessage>;
 }
 
 const MainScreen= (props)=>{
+    const {navigation}=props
     const [modalVis,SetModalVis]=useState(false)
-    const MessageList:MessageListProps=({messages})=>{
+    const MessageList=({messages}:MessageListProps)=>{
         return(
             <Text>Message list</Text>
         )
@@ -50,6 +47,10 @@ const MainScreen= (props)=>{
         useEffect(()=>{
             modalVis&&fetchUsers()
         },[modalVis])
+        const onItemPress=(item)=>{
+            navigation.navigate('ChatScreen',{item:item})
+            console.log(item)
+        }
         return(
             <Modal
                 isVisible={modalVis}
@@ -65,10 +66,14 @@ const MainScreen= (props)=>{
                         let {login,avatarUri}=item;
                         
                         return(
-                            <View key={index} style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                            <TouchableOpacity 
+                                key={index} 
+                                style={styles.listItemStyle}
+                                onPress={()=>{onItemPress(item)}}
+                            >
                                 <Image source={{uri:avatarUri}} style={styles.avatarStyle}/>
                                 <Text style={styles.userNameStyle}>{login}</Text>
-                            </View>
+                            </TouchableOpacity>
                         )
                     })}
                 </View>
@@ -118,6 +123,15 @@ const styles = StyleSheet.create({
         fontSize:20,
         marginLeft:20,
         fontWeight:'bold'
+    },
+    listItemStyle:{
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between',
+        backgroundColor:'gray',
+        paddingHorizontal:10,
+        paddingVertical:5,
+        borderRadius:10
     }
 })
 const mapDispatchToProps = dispatch => {
