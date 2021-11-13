@@ -14,9 +14,9 @@ describe('First test', () => {
     await expect(element(by.text('Please log in'))).toBeVisible();
   });
 
-  it('It should login with Nikita/babcia2', async () => {
+  it('It should login with Nikita/111111', async () => {
     await element(by.id('loginField')).typeText('Nikita');
-    await element(by.id('passwordField')).typeText('babcia2');
+    await element(by.id('passwordField')).typeText('111111');
     await element(by.id('loginButton')).tap();
     await sleep(2000);
     await expect(element(by.id('mainHelloText'))).toBeVisible();
